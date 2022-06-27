@@ -5,12 +5,22 @@ export default function App (){
   const [peso, setPeso] = useState('');
   const [altura, setAltura] = useState('');
 
+  const [message, setMessage] = useState('');
+
 
   function calcularIMC(){
     const alt = altura /100;
     const imc = peso /(alt * alt);
 
-    alert(imc.toFixed(2));
+    if(imc < 18.6) {
+      setMessage("Você está abaixo do peso! Seu IMC: " + imc.toFixed(2))
+    } else if (imc > 18.6 && imc < 24.9 ){
+      setMessage("Peso ideal! Seu IMC: " + imc.toFixed(2))
+    } else if (imc >= 24.9 && imc < 34.9) {
+      setMessage("Você esta levemente acima do peso, Seu IMC: " + imc.toFixed(2))
+    } else if (imc >= 34.9)
+    setMessage("Cuidado!! Obesidade, seu IMC: " + imc.toFixed(2))
+
   }
 
   return(
@@ -38,7 +48,7 @@ export default function App (){
       
     </div>
 
-    <h2>Seu imc foi 25, você está baixo do peso</h2>
+    <h2>{message}</h2>
   </div>  
   )
 }
